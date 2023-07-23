@@ -1,5 +1,4 @@
-import task1_1
-
+from task1_2 import task1_1
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

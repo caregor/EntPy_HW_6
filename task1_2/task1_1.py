@@ -6,6 +6,7 @@
 Весь период (1 января 1 года - 31 декабря 9999 года) действует Григорианский календарь.
 Проверку года на високосность вынести в отдельную защищённую функцию.
 """
+import sys
 
 
 def _is_leap_year(year):
@@ -30,3 +31,19 @@ def is_valid_date(date_string):
             return False
     except ValueError:
         return False
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Использование: python tas1_2/task1_1.py DD.MM.YYYY")
+        return
+
+    date_string = sys.argv[1]
+    if is_valid_date(date_string):
+        print(f"{date_string} - Дата существует.")
+    else:
+        print(f"{date_string} - Некорректная дата.")
+
+
+if __name__ == "__main__":
+    main()
