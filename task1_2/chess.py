@@ -7,7 +7,9 @@
 Если ферзи не бьют друг друга верните истину, а если бьют - ложь.
 """
 
+import random
 
+MAX_ATTEPMTS = 1_000_000
 def is_valid_queens(arrangement):
     def is_diagonal(x1, y1, x2, y2):
         return abs(x1 - x2) == abs(y1 - y2)
@@ -21,16 +23,24 @@ def is_valid_queens(arrangement):
     return True
 
 
-def main():
-    arrangement = []
-    for _ in range(8):
-        x, y = map(int, input().split())
-        arrangement.append((x, y))
+def random_queens_arrangement():
+    queens = [(x, y) for x in range(1, 9) for y in range(1, 9)]
+    random.shuffle(queens)
+    return queens[:8]
 
-    if is_valid_queens(arrangement):
-        print("True")
-    else:
-        print("False")
+
+def main():
+    successful_arrangements = 0
+    attempts = 0
+
+    while successful_arrangements < 1 and attempts < MAX_ATTEPMTS:
+        arrangement = random_queens_arrangement()
+        if is_valid_queens(arrangement):
+            successful_arrangements += 1
+            print(f"Успешная расстановка {successful_arrangements}: {arrangement}")
+        attempts += 1
+        if attempts == MAX_ATTEPMTS - 1:
+            print('Комбинация не найдена.')
 
 
 if __name__ == "__main__":
